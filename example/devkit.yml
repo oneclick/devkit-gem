@@ -1,0 +1,6 @@
+# devkit.yml
+#
+# This file indicates the version of RubyInstaller's DevKit required by this
+# version of Ruby
+---
+version: mingw64-64-4.7.2
