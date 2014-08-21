@@ -7,6 +7,7 @@ module DevKit
     attr_reader :path
     attr_reader :version_info
 
+    # FIXME: remove external dependency, we only need new ENV variables
     def initialize(path, version_info = DevKit.version_info, env = ENV)
       @env          = env
       @path         = path
