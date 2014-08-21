@@ -2,5 +2,13 @@
 #
 # This file indicates the version of RubyInstaller's DevKit required by this
 # version of Ruby
+#
+# It also includes the environment settings that will be set when this DevKit
+# is enabled.
+
 ---
 version: mingw64-64-4.7.2
+environment:
+  CC: gcc
+  CXX: g++
+  CPP: cpp
