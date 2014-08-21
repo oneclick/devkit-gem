@@ -8,6 +8,7 @@ module DevKit
 
     private
 
+    # TODO: Make probes aware of different executable names
     def detect(path)
       msys_bin  = File.join(path, "bin")
       mingw_bin = File.join(path, "mingw", "bin")
