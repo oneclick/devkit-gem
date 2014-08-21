@@ -3,11 +3,7 @@ require "yaml"
 module DevKit
   class VersionFile < Struct.new(:root)
     def version
-      return @version if @version
-
-      data = YAML.load_file(config_file)
-
-      @version = data["version"]
+      data.fetch("version")
     end
 
     private
@@ -19,6 +15,10 @@ module DevKit
         raise "DevKit's version file (`devkit.yml`) not found."
 
       config_file
+    end
+
+    def data
+      @data ||= YAML.load_file(config_file)
     end
   end
 end
