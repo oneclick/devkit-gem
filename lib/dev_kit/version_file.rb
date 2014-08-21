@@ -2,6 +2,10 @@ require "yaml"
 
 module DevKit
   class VersionFile < Struct.new(:root)
+    def environment
+      @environment ||= data.fetch("environment", {})
+    end
+
     def version
       data.fetch("version")
     end
