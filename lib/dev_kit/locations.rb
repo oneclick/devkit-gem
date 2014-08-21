@@ -2,9 +2,11 @@ require "dev_kit/version_file"
 
 module DevKit
   class Locations
-    def initialize(ruby = Gem.ruby)
-      @ruby      = ruby
-      @ruby_root = File.expand_path("../..", ruby)
+    attr_reader :ruby_root
+
+    def initialize(ruby_exe = Gem.ruby)
+      # path/bin/ruby.exe
+      @ruby_root = File.expand_path("../..", ruby_exe)
     end
 
     def all
@@ -18,7 +20,7 @@ module DevKit
       return @default_dir if @default_dir
 
       base_dir = File.expand_path(ENV["ProgramData"] || ENV["ALLUSERSPROFILE"])
-      required_version = VersionFile.new(@ruby_root).version
+      required_version = VersionFile.new(ruby_root).version
 
       path = [
         base_dir,
@@ -31,7 +33,7 @@ module DevKit
     end
 
     def ruby_relative
-      File.join(@ruby_root, "DevKit")
+      File.join(ruby_root, "DevKit")
     end
   end
 end
