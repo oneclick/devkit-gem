@@ -1,10 +1,18 @@
 # devkit.yml
 #
-# This file indicates the version of RubyInstaller's DevKit required by this
-# version of Ruby
+# This file provides information about the compiler toolchain (DevKit)
+# required by this version of Ruby.
 #
-# It also includes the environment settings that will be set when this DevKit
-# is enabled.
+# The correct location of this file will be at the root of your Ruby
+# installation (at the same level as bin and lib directories).
+#
+# It contains extra information, like name of executables
+# (CC, CXX, CPP and MAKE) used during the compilation of extensions.
+#
+# A list of paths is provided to indicate where those executables might be
+# found.
+#
+# Those combined will be used as probes during DevKit detection.
 
 ---
 version: mingw64-64-4.7.2
