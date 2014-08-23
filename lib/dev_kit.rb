@@ -1,6 +1,6 @@
 require "dev_kit/detector"
 require "dev_kit/locations"
-require "dev_kit/version_file"
+require "dev_kit/info_file"
 
 module DevKit
   def self.available
@@ -8,14 +8,14 @@ module DevKit
   end
 
   def self.candidates
-    Locations.new(version_info).all
+    Locations.new(info_file).all
   end
 
-  def self.version_info
-    return @version_info if @version_info
+  def self.info_file
+    return @info_file if @info_file
 
     ruby_root = File.expand_path("../..", Gem.ruby)
 
-    @version_info = VersionFile.new(ruby_root)
+    @info_file = InfoFile.new(ruby_root)
   end
 end

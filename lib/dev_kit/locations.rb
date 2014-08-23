@@ -1,13 +1,13 @@
-require "dev_kit/version_file"
+require "dev_kit/info_file"
 
 module DevKit
   class Locations
     attr_reader :ruby_root
 
-    def initialize(version_file = nil, ruby_exe = Gem.ruby)
+    def initialize(info_file = nil, ruby_exe = Gem.ruby)
       # path/bin/ruby.exe
-      @ruby_root    = File.expand_path("../..", ruby_exe)
-      @version_file = version_file
+      @ruby_root = File.expand_path("../..", ruby_exe)
+      @info_file = info_file
     end
 
     def all
@@ -21,7 +21,7 @@ module DevKit
       return @default_dir if @default_dir
 
       base_dir = File.expand_path(ENV["ProgramData"] || ENV["ALLUSERSPROFILE"])
-      required_version = version_file.version
+      required_version = info_file.version
 
       path = [
         base_dir,
@@ -39,8 +39,8 @@ module DevKit
 
     private
 
-    def version_file
-      @version_file ||= VersionFile.new(ruby_root)
+    def info_file
+      @info_file ||= InfoFile.new(ruby_root)
     end
   end
 end

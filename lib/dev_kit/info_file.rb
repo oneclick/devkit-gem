@@ -1,7 +1,7 @@
 require "yaml"
 
 module DevKit
-  class VersionFile < Struct.new(:root)
+  class InfoFile < Struct.new(:root)
     def environment
       @environment ||= data.fetch("environment", {})
     end
@@ -16,7 +16,7 @@ module DevKit
       config_file = File.join(root, "devkit.yml")
 
       File.exist?(config_file) or
-        raise "DevKit's version file (`devkit.yml`) not found."
+        raise "DevKit's info file (`devkit.yml`) not found."
 
       config_file
     end
