@@ -8,7 +8,11 @@
 
 ---
 version: mingw64-64-4.7.2
+paths:
+  - bin
+  - mingw/bin
 environment:
   CC: gcc
   CXX: g++
   CPP: cpp
+  MAKE: make
