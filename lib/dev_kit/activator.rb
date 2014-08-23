@@ -1,17 +1,14 @@
-require "dev_kit/version_file"
-
 module DevKit
   class Activator
     DK_KEY = "RI_DEVKIT".freeze
 
+    attr_reader :variables
     attr_reader :path
-    attr_reader :version_info
 
-    # FIXME: remove external dependency, we only need new ENV variables
-    def initialize(path, version_info = DevKit.version_info, env = ENV)
-      @env          = env
-      @path         = path
-      @version_info = version_info
+    def initialize(path, variables = nil, env = ENV)
+      @env       = env
+      @path      = path
+      @variables = variables || {}
     end
 
     def activate!
@@ -60,7 +57,7 @@ module DevKit
     end
 
     def set_environment
-      version_info.each do |key, value|
+      variables.each do |key, value|
         @env[key] = value
       end
     end
