@@ -2,21 +2,23 @@ module DevKit
   class Activator
     DK_KEY = "RI_DEVKIT".freeze
 
-    attr_reader :variables
+    attr_reader :info_file
     attr_reader :path
 
-    def initialize(path, variables = nil, env = ENV)
+    def initialize(path, info_file = DevKit.info_file, env = ENV)
       @env       = env
+      @info_file = info_file
       @path      = path
-      @variables = variables || {}
     end
 
     def activate!
-      return if activated?
+      return false if activated?
 
       set_path
       set_devkit
       set_environment
+
+      true
     end
 
     def activated?
@@ -32,10 +34,9 @@ module DevKit
     def formatted_paths
       return @formatted_paths if @formatted_paths
 
-      paths = [
-        File.join(path, "bin"),
-        File.join(path, "mingw", "bin")
-      ]
+      paths = info_file.paths.collect { |p|
+        File.join(path, p)
+      }
 
       @formatted_paths = paths.collect { |path|
         path.gsub(File::SEPARATOR, File::ALT_SEPARATOR)
@@ -57,7 +58,7 @@ module DevKit
     end
 
     def set_environment
-      variables.each do |key, value|
+      info_file.environment.each do |key, value|
         @env[key] = value
       end
     end
