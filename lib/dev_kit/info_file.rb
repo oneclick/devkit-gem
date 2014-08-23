@@ -6,6 +6,10 @@ module DevKit
       @environment ||= data.fetch("environment", {})
     end
 
+    def paths
+      @paths ||= data.fetch("paths", [])
+    end
+
     def version
       data.fetch("version")
     end

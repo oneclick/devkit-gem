@@ -1,5 +1,15 @@
+require "rbconfig"
+
 module DevKit
-  class Detector < Struct.new(:locations)
+  class Detector
+    attr_reader :info_file
+    attr_reader :locations
+
+    def initialize(locations, info_file = DevKit.info_file)
+      @info_file = info_file
+      @locations = Array(locations)
+    end
+
     def available
       locations.select { |location|
         detect(location)
@@ -8,18 +18,26 @@ module DevKit
 
     private
 
-    # TODO: Make probes aware of different executable names
+    # for *all* the executables
+    # try combinations of path + paths where the executables are found
     def detect(path)
-      msys_bin  = File.join(path, "bin")
-      mingw_bin = File.join(path, "mingw", "bin")
+      executables.all? { |executable|
+        info_file.paths.any? { |p|
+          file = File.join(path, p, executable)
 
-      probes = [
-        File.join(msys_bin, "make.exe"),
-        File.join(mingw_bin, "gcc.exe")
-      ]
+          File.exist?(file) && File.executable?(file)
+        }
+      }
+    end
 
-      probes.all? { |file|
-        File.exist?(file) && File.executable?(file)
+    def executables
+      return @executables if @executables
+
+      exe_ext = RbConfig::CONFIG["EXEEXT"]
+
+      # FIXME: demeter.would.not.like.this
+      @executables = info_file.environment.values.collect { |file|
+        "#{file}#{exe_ext}"
       }
     end
   end
