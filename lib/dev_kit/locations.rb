@@ -11,10 +11,10 @@ module DevKit
     end
 
     def all
-      paths = []
-      paths << ruby_relative
-      paths << default_dir
-      paths
+      [
+        ruby_relative,
+        default_dir
+      ]
     end
 
     def default_dir
