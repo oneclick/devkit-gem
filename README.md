@@ -1,6 +1,29 @@
-# RubyInstaller's DevKit
+# RubyInstaller's DevKit - PoC
 
-TODO: Write a gem description
+Proof-of-Concept of simpler RubyInstaller's DevKit activation and detection
+mechanism.
+
+It aims to replace current approach of dealing with DevKit installation and
+replace by a RubyGems plugin.
+
+**IMPORTANT**
+
+This project is not 100% functional, it implements some of the ideas
+mentioned in RubyInstaller's mailing list:
+
+https://groups.google.com/d/topic/rubyinstaller/fZAmPSlz4zM/discussion
+
+Please see the TODO list of things to be completed before this project can
+be considered ready.
+
+## TODO
+
+- [ ] Add basic `devkit.rb`
+- [ ] Add RubyGems plugin hook
+- [ ] Reorganize classes and introduce specs to activation and detection
+- [ ] Download, verify and extract DevKit (perhaps bundle 7za?)
+- [ ] `devkit.yml` generator
+- [ ] CLI
 
 ## Installation
 
