@@ -25,6 +25,30 @@ be considered ready.
 - [ ] `devkit.yml` generator
 - [ ] CLI
 
+## Internals
+
+The following describes a bit the internal classes of this gem:
+
+```ruby
+# obtain list of possible places for DevKit installation
+DevKit.candidates
+# => ["C:/Ruby200-x64/DevKit", "C:/ProgramData/RubyInstaller/DevKit/mingw64-64-4.7.2"]
+
+# determine real availability (using checks and binaries listed in devkit.yml)
+path = DevKit.available.first
+# => "C:/ProgramData/RubyInstaller/DevKit/mingw64-64-4.7.2"
+
+# activate the DevKit in path
+activator = DevKit::Activator.new(path)
+# => #<DevKit::Activator:0x0000000313e860 .... @info_file=#<struct DevKit::InfoFile root="C:/Ruby200-x64">, @path="C:/ProgramData/RubyInstaller/DevKit/mingw64-64-4.7.2">
+
+a.activate!
+# => true
+
+a.activated?
+# => true
+```
+
 ## Installation
 
 Use RubyGems to install the gem:
