@@ -6,6 +6,7 @@ require "dev_kit/version"
 Gem::Specification.new do |spec|
   spec.name          = "rubyinstaller-devkit"
   spec.version       = DevKit::VERSION
+
   spec.authors       = ["Luis Lavena"]
   spec.email         = ["luislavena@gmail.com"]
   spec.summary       = %q{PoC - RubyInstaller's DevKit as gem}
